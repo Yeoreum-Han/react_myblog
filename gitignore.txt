@@ -24,3 +24,5 @@ yarn-error.log*
 
 test.js
 test2.js
+
+node_modules
