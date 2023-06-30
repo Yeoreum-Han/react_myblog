@@ -61,32 +61,33 @@ const CreateForm = ({ editing }) => {
     setContentError(false);
     setCateError(false);
     if (validateCheck()) {
-        if(editing){
-            axios.patch(`http://localhost:3001/posts/${id}`, {
-                category,
-                title,
-                content,
-                imageString,
-                privatePost,
-            })
-            .then(()=>{
-                history.push(`/${id}`);
-            })
-        } else {
-            axios
-            .post("http://localhost:3001/posts", {
-              category,
-              title,
-              createdAt: Date.now(),
-              content,
-              imageString,
-              privatePost,
-            })
-            .then(() => {
-              history.push(`/${category}`);
-              URL.revokeObjectURL(imageUrl);
-            });
-        }
+      if (editing) {
+        axios
+          .patch(`http://localhost:3001/posts/${id}`, {
+            category,
+            title,
+            content,
+            imageString,
+            privatePost,
+          })
+          .then(() => {
+            history.push(`/${id}`);
+          });
+      } else {
+        axios
+          .post("http://localhost:3001/posts", {
+            category,
+            title,
+            createdAt: Date.now(),
+            content,
+            imageString,
+            privatePost,
+          })
+          .then(() => {
+            history.push(`/${category}`);
+            URL.revokeObjectURL(imageUrl);
+          });
+      }
     }
   };
 
@@ -94,7 +95,7 @@ const CreateForm = ({ editing }) => {
     if (editing) {
       history.push(`/${id}`);
     } else {
-      history.push('/private/admin');
+      history.push("/private/admin");
     }
   };
 
@@ -154,10 +155,34 @@ const CreateForm = ({ editing }) => {
           <label htmlFor="inputContent" className="form-label fs-4 mt-2">
             내용
           </label>
+          <input
+            className="form-control form-control-sm formFile"
+            type="file"
+            id="inputFile"
+            name="fileImage"
+            multiple
+            onChange={updateImage}
+          />
+          <div className="imgCover my-3" style={{textAlign:'center'}}>
+            {editing ? (
+              <img
+                src={imageString}
+                alt="저장한이미지"
+                style={{ maxWidth: "500px", maxHeight: "300px" }}
+              />
+            ) : (
+              <img
+                src={imageUrl && imageUrl}
+                alt="저장한이미지"
+                style={{ maxWidth: "200px", maxHeight: "200px" }}
+              />
+            )}
+          </div>
           <textarea
             className={`form-control formContent mb-3 ${
               contentError && "errorBorder"
             }`}
+            style={{textAlign:'center'}}
             id="inputContent"
             rows="10"
             placeholder="5줄로 작성"
@@ -167,14 +192,7 @@ const CreateForm = ({ editing }) => {
             }}
           ></textarea>
           {contentError && <p style={{ color: "red" }}>내용을 채워주세요</p>}
-          <input
-            className="form-control form-control-sm formFile"
-            type="file"
-            id="inputFile"
-            name="fileImage"
-            multiple
-            onChange={updateImage}
-          />
+
           <div className="d-flex flex-row justify-content-between mt-4 checkAndBtn">
             <div className="form-check">
               <input
@@ -196,15 +214,18 @@ const CreateForm = ({ editing }) => {
                 className="btn btnSubmit btn-outline-primary"
                 onClick={onSubmit}
               >
-                {editing ? '수정' : '저장'}
+                {editing ? "수정" : "저장"}
               </button>
-              <button type="button" className="btn btnCancel btn-danger ms-2" onClick={goBack}>
+              <button
+                type="button"
+                className="btn btnCancel btn-danger ms-2"
+                onClick={goBack}
+              >
                 취소
               </button>
             </div>
           </div>
         </form>
-       {editing ? <img src={imageString} alt="저장한이미지" />: <img src={imageUrl && imageUrl} alt="저장한이미지" />}
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
 import routes from "./routes";
 import Bottom from "./components/Bottom";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
 
@@ -15,9 +16,19 @@ function App() {
       <div className="App">
         <NavBar />
         <div className="d-flex comps">
-          <SideBar isAdmin={true}/>
+          <SideBar/>
           <Switch>
             {routes.map((route) => {
+              if(route.auth){
+                return (
+                  <ProtectedRoute
+                  exact
+                  key={route.path}
+                  path={route.path}
+                  component={route.component}   
+                  />             
+                  );
+              }
               return (
                 <Route
                   exact

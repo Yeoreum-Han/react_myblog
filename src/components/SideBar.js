@@ -1,10 +1,13 @@
 import profile from '../images/coffee.jpg';
 import {Link, NavLink} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const SideBar = ({isAdmin}) => {
+const SideBar = () => {
   const activeStyle = {
     fontWeight : 'bold'
   }
+  const isLoggedIn = useSelector((state)=>state.auth.isLoggedIn);
+
   return (
     <div className="sideBg d-flex flex-column align-items-center">
       <div className="prof d-flex flex-column align-items-center mt-5 mb-3">
@@ -32,7 +35,7 @@ const SideBar = ({isAdmin}) => {
               Blogs
             </NavLink>
           </li>
-          {isAdmin && <li className="nav-item mb-4 sideLi">
+          {isLoggedIn && <li className="nav-item mb-4 sideLi">
             <NavLink to="/private/admin" activeStyle={activeStyle} className="nav-link fs-5 sideText">
               Admin
             </NavLink>

@@ -1,42 +1,48 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { useHistory } from "react-router-dom/cjs/react-router-dom";
-import axios from "axios";
+// import { useHistory } from "react-router-dom/cjs/react-router-dom";
+// import axios from "axios";
+import { login, logout } from "../store/authSlice";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
 
 const NavBar = () => {
   const activeStyle = {
     fontWeight: "bold",
   };
-  const [word, setWord] = useState("");
-  const history = useHistory();
-  const [post, setPosts] = useState([]);
 
-  const onSearch = (e) => {
-    if (e.key === "Enter") {
-      console.log("1.axios 전: ", word);
-      axios
-        .get("http://localhost:3001/posts", {
-          params: {
-            _sort: "id",
-            _order: "desc",
-            privatePost: false,
-            title_like: word,
-          },
-        })
-        .then((res) => {
-          setPosts(res.data);
-          console.log("2.axios 후 : ", word);
-          console.log(post);
-          history.push({
-            pathname: "/search/navResult",
-            word : word,
-            data: post,
-          });
-          console.log(word);
-        });
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
+  // const [word, setWord] = useState("");
+  // const history = useHistory();
+  // const [post, setPosts] = useState([]);
+
+  // const onSearch = (e) => {
+  //   if (e.key === "Enter") {
+  //     console.log("1.axios 전: ", word);
+  //     axios
+  //       .get("http://localhost:3001/posts", {
+  //         params: {
+  //           _sort: "id",
+  //           _order: "desc",
+  //           privatePost: false,
+  //           title_like: word,
+  //         },
+  //       })
+  //       .then((res) => {
+  //         setPosts(res.data);
+  //         console.log("2.axios 후 : ", word);
+  //         console.log(post);
+  //         history.push({
+  //           pathname: "/search/navResult",
+  //           word : word,
+  //           data: post,
+  //         });
+  //         console.log(word);
+  //       });
       
-    }
-  };
+  //   }
+  // };
 
   return (
     <nav className="navbar navBg">
@@ -50,8 +56,8 @@ const NavBar = () => {
               className="form-control navSearch form-control-sm h-25 mt-1 me-2"
               type="search"
               aria-label="Search"
-              onChange={(e) => setWord(e.target.value)}
-              onKeyUp={onSearch}
+              // onChange={(e) => setWord(e.target.value)}
+              // onKeyUp={onSearch}
             />
             <button
               className="btn navSearchBtn btn-sm btn-outline-secondary h-75 mt-1 me-3"
@@ -81,9 +87,17 @@ const NavBar = () => {
                 </NavLink>
               </li>
               <li className="nav-item navLi">
-                <Link className="navbar navText" to="/">
-                  로그인
-                </Link>
+                <button className="navbar navBtn navText"
+                  onClick={()=>{
+                    if(isLoggedIn){
+                      dispatch(logout());
+                    } else {
+                      dispatch(login());
+                    }
+                  }}
+                >
+                  {isLoggedIn ? '로그아웃' : '로그인'}
+                </button>
               </li>
             </ul>
           </div>

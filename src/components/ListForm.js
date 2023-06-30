@@ -4,7 +4,7 @@ import { useLocation, useHistory } from "react-router-dom/cjs/react-router-dom";
 import CardForm from "./CardForm";
 import Pagination from "./Pagination";
 
-const ListForm = ({ isAdmin }) => {
+const ListForm = ({isAdmin}) => {
   const [posts, setPosts] = useState([]);
   const location = useLocation();
   const history = useHistory();
@@ -20,7 +20,6 @@ const ListForm = ({ isAdmin }) => {
 
   const urlPageParams = new URLSearchParams(location.search);
   const pageParam = urlPageParams.get('page');
-
 
   const getPosts = useCallback ((page = 1) => {
     setCurrentPage(page);
@@ -83,10 +82,16 @@ const ListForm = ({ isAdmin }) => {
   };
 
 
+
   return (
     <div>
-      <div className="row row-cols-1 row-cols-md-3 g-4">{renderCards()}</div>
-      <div className="d-flex justify-content-center mt-5 pt-5"> 
+      <div className="row row-cols-1 row-cols-md-3 g-2 px-4">{renderCards()}</div>
+      {isAdmin && 
+        <div className="d-flex flex-row justify-content-between me-5 mt-3">
+          <div/>
+          <div onClick={()=>{history.push('/create')}} className="me-4 px-2 writeBtn" style={{textDecoration : 'none', color : '#333', cursor : 'pointer'}}>글쓰기</div>
+        </div>}
+      <div className="d-flex justify-content-center pt-5"> 
         {totalPage > 1 && <Pagination currentPage={currentPage} totalPage={totalPage} onClick={onClickPageButton}/>}
       </div>
     </div>

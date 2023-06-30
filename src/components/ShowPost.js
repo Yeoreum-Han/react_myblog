@@ -1,15 +1,15 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const ShowPosts = () => {
   const { id } = useParams();
-
   const [post, setPost] = useState([]);
-
   const history = useHistory();
+  const isLoggedIn = useSelector((state)=>state.auth.isLoggedIn);
 
   const getPosts = (id) => {
     axios.get(`http://localhost:3001/posts/${id}`).then((res) => {
@@ -49,7 +49,7 @@ const ShowPosts = () => {
           </div>
           <div className="showContent fs-4 text-center">
             <img src={post.imageString} alt="..." className="showImgSize" />
-            <p className="mt-5 fs-6">{post.content}</p>
+            <p className="mt-5 fs-6" style={{whiteSpace : 'pre-wrap'}}>{post.content}</p>
           </div>
         </div>
         <div className="d-flex flex-row justify-content-between mt-4">
@@ -65,7 +65,7 @@ const ShowPosts = () => {
               비공개
             </label>
           </div>
-          <div>
+          {isLoggedIn && <div>
             <button type="button" className="btn btnEdit btn-outline-success ms-2" onClick={()=>{moveToEdit(post.id)}}>
               수정
             </button>
@@ -74,7 +74,7 @@ const ShowPosts = () => {
             >
               삭제
             </button>
-          </div>
+          </div>}
         </div>
       </div>
     </div>

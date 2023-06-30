@@ -1,53 +1,56 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 /* Navbar */
-.navBg{
+.navBg {
   background-color: #e3f2fd;
 }
-.navHome{
+.navHome {
   letter-spacing: 3px;
   text-indent: 80px;
 }
-.navLi{
+.navLi {
   width: 70px;
 }
-.navText{
-  color: #0E2954;
+.navText {
+  color: #0e2954;
   text-decoration: none;
-  width: 60px;
+  width: 70px;
   letter-spacing: 1px;
 }
-.navText:hover{
+.navText:hover {
   color: rgb(202, 210, 216);
+}
+.navBtn {
+  border: none;
+  background-color: #e3f2fd;
 }
 .form-control:focus {
   border-color: #9da39e;
   box-shadow: 0 0 0 0.1rem #00c3ff42;
-} 
-.navSearch{
+}
+.navSearch {
   border-radius: 50px;
   text-indent: 5px;
 }
-.navSearchBtn{
+.navSearchBtn {
   border-radius: 10px;
 }
-.navSearchBtn:hover{
+.navSearchBtn:hover {
   background-color: #e3f2fd;
   color: #333;
 }
-
 
 /* Sidebar */
 .sideBg {
@@ -55,27 +58,27 @@ code {
   width: 17%;
   height: 950px;
 }
-.prof{
-    width: 80%;
+.prof {
+  width: 80%;
 }
 
-.profImg{
-    width: 150px;
-    height: 150px;
+.profImg {
+  width: 150px;
+  height: 150px;
 }
 
 .profP {
-    width: 80%;
+  width: 80%;
 }
 
-.sideText{
-    color: #0E2954;
+.sideText {
+  color: #0e2954;
 }
 
-.sideText:hover{
-    color: rgb(202, 210, 216);
+.sideText:hover {
+  color: rgb(202, 210, 216);
 }
-.sideLi{
+.sideLi {
   width: 100px;
   height: 50px;
   letter-spacing: 3px;
@@ -121,137 +124,149 @@ code {
 .recentTitle {
   letter-spacing: 5px;
 }
-.recentsCover{
+.recentsCover {
   width: 95%;
   border-radius: 5px;
   box-sizing: border-box;
   border-top: 1px solid #333;
   border-bottom: 1px solid #333;
   border-radius: 5px;
-
 }
-.recentsHeader{
+.recentsHeader {
   border-radius: 5px;
   font-weight: bold;
 }
-.recentPostTitle{
+.recentPostTitle {
   cursor: pointer;
 }
-.recentPostTitle:hover{
+.recentPostTitle:hover {
   text-decoration: underline;
 }
 
 /*Bottom*/
-.bottom{
+.bottom {
   height: 80px;
 }
 
 /* CreateForm */
 .pageCreate {
   width: 75%;
-  padding:5%;
+  padding: 5%;
 }
-.createTitle{
+.createTitle {
   letter-spacing: 5px;
 }
-.formSelect{
+.formSelect {
   width: 20%;
 }
-.form-select:focus{
+.form-select:focus {
   border-color: #9da39e;
   box-shadow: 0 0 0 0.1rem #00c3ff42;
 }
-.inputForms{
+.inputForms {
   width: 100%;
 }
 
-.form-label{
+.form-label {
   letter-spacing: 5px;
 }
 
-.formTitle, .formFile{
+.formTitle,
+.formFile {
   width: 80%;
 }
-.formContent{
+.formContent {
   width: 80%;
   resize: none;
   white-space: pre-wrap;
 }
+.imgCover{
+  width: 80%;
+}
 
-.checkAndBtn{
+.checkAndBtn {
   margin-right: 20%;
 }
 
-.inputCheck:focus{
+.inputCheck:focus {
   border-color: #9da39e;
   box-shadow: none;
 }
 
-
-.btnSubmit:hover{
+.btnSubmit:hover {
   background-color: #ffffff;
-  color:#0E2954;
+  color: #0e2954;
 }
 
-.btnCancel{
-  background-color: #FF8787;
-  border: 1px solid #FF8787;
+.btnCancel {
+  background-color: #ff8787;
+  border: 1px solid #ff8787;
 }
 
-.btnCancel:hover{
-  background-color: #E97777;
-  border: 1px solid #E97777;
+.btnCancel:hover {
+  background-color: #e97777;
+  border: 1px solid #e97777;
 }
 .errorBorder {
   border: 1px solid red;
 }
 
 /* CardForm */
-.cardForm{
+.cardForm {
   width: 75%;
   min-height: 980px;
   padding: 5%;
 }
-.cardTitle{
+.cardTitle {
   white-space: normal;
   text-overflow: ellipsis;
 }
 
 /* Reviews */
-.comp{
+.comp {
   width: 75%;
   min-height: 980px;
   padding: 5%;
   /* background-color: #E97777; */
 }
-.reviewsTitle{
+.reviewsTitle {
   letter-spacing: 5px;
 }
-.card{
+.card {
   cursor: pointer;
 }
-.cardCover{
+.cardCover {
   background-color: #e3f2fd;
   /* width: 100%; */
 }
 /* showPost */
-.showForm{
+.showForm {
   min-height: 980px;
 }
-.showTitle{
+.showTitle {
   letter-spacing: 5px;
 }
-.showImgSize{
+.showImgSize {
   max-width: 80%;
   max-height: 50%;
 }
 
-.showContent{
+.showContent {
   letter-spacing: 3px;
 }
 
-.btnEdit:hover{
+.btnEdit:hover {
   background-color: #ffffff;
   color: green;
 }
 
+/*Lisform*/
+.writeBtn::before {
+  background: url(./images/edit.png) no-repeat 0 2px;
+  background-size: 18px 16px;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  content: "";
+}

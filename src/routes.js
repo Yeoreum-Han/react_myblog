@@ -22,7 +22,8 @@ const routes = [
     },
     {
         path: "/create",
-        component : CreatePage
+        component : CreatePage,
+        auth : true
     },
     {
         path:"/:id",
@@ -30,7 +31,8 @@ const routes = [
     },
     {
         path: "/:id/edit",
-        component : EditPost
+        component : EditPost,
+        auth : true
     },
     {
         path:"/search/navResult",
@@ -38,7 +40,8 @@ const routes = [
     },
     {
         path:"/private/admin",
-        component : Admin
+        component : Admin,
+        auth : true
     }
 ];
 export default routes;
