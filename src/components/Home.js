@@ -2,10 +2,16 @@ import axios from "axios";
 import profile from "../images/coffee.jpg";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import LoadingSpinner from "./LoadingSpinner";
 
 const Home = () => {
   const [recents, setRecents] = useState([]);
   const history = useHistory();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getRecents();
+  }, []);
 
   const getRecents = () => {
     axios
@@ -14,12 +20,15 @@ const Home = () => {
       })
       .then((res) => {
         setRecents(res.data);
+        setLoading(false);
       });
   };
 
-  useEffect(() => {
-    getRecents();
-  }, []);
+  if(loading){
+    return <LoadingSpinner />;
+  }
+
+
 
   const printDate = (timestamp) =>{
     return new Date(timestamp).toLocaleDateString();
@@ -68,7 +77,7 @@ const Home = () => {
         <div className=" col">
           <div className=" recentsHeader py-3 fs-5 row">
             <div className="col-1"/>
-            <div className="col-1 py-2">게시판</div>
+            <div className="col-1 py-2">분류</div>
             <div className="col-7 py-2">제목</div>
             <div className="col-2 py-2">날짜</div>
             <div className="col-1"/>

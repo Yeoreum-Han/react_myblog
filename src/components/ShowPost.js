@@ -4,18 +4,33 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import LoadingSpinner from "./LoadingSpinner";
+
 
 const ShowPosts = () => {
   const { id } = useParams();
   const [post, setPost] = useState([]);
   const history = useHistory();
   const isLoggedIn = useSelector((state)=>state.auth.isLoggedIn);
+  const [loading, setLoading] = useState(true);
+
 
   const getPosts = (id) => {
     axios.get(`http://localhost:3001/posts/${id}`).then((res) => {
       setPost(res.data);
+      setLoading(false);
     });
   };
+
+  useEffect(() => {
+    getPosts(id);
+  }, [id]);
+
+  
+  if(loading){
+    return <LoadingSpinner />;
+  }
+
 
   const moveToEdit = (id) => {
     history.push(`/${id}/edit`);
@@ -26,10 +41,6 @@ const ShowPosts = () => {
       history.push('/private/admin');
     });
   }
-
-  useEffect(() => {
-    getPosts(id);
-  }, [id]);
 
   const printDate = (timestamp) => {
     return new Date(timestamp).toLocaleString();

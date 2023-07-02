@@ -4,6 +4,8 @@ import {
   useHistory,
   useParams,
 } from "react-router-dom/cjs/react-router-dom.min";
+import LoadingSpinner from "./LoadingSpinner";
+
 
 const CreateForm = ({ editing }) => {
   const [title, setTitle] = useState("");
@@ -19,6 +21,8 @@ const CreateForm = ({ editing }) => {
   const [cateError, setCateError] = useState(false);
 
   const history = useHistory();
+
+  const [loading, setLoading] = useState(true);
 
   const { id } = useParams();
   const updateImage = (e) => {
@@ -107,9 +111,15 @@ const CreateForm = ({ editing }) => {
         setContent(res.data.content);
         setImageString(res.data.imageString);
         setPrivatePost(res.data.privatePost);
+        setLoading(false);
       });
     }
   }, [id, editing]);
+  if (editing) {
+    if (loading) {
+      return <LoadingSpinner />;
+    }
+  }
 
   return (
     <div className="pageCreate d-flex flex-column">
@@ -141,9 +151,8 @@ const CreateForm = ({ editing }) => {
           {cateError && <p style={{ color: "red" }}>카테고리를 선택해주세요</p>}
           <input
             type="text"
-            className={`form-control formTitle mb-3 ${
-              titleError && "errorBorder"
-            }`}
+            className={`form-control formTitle mb-3 ${titleError && "errorBorder"
+              }`}
             id="inputTitle"
             placeholder="제목"
             value={title}
@@ -163,7 +172,7 @@ const CreateForm = ({ editing }) => {
             multiple
             onChange={updateImage}
           />
-          <div className="imgCover my-3" style={{textAlign:'center'}}>
+          <div className="imgCover my-3" style={{ textAlign: 'center' }}>
             {editing ? (
               <img
                 src={imageString}
@@ -179,10 +188,9 @@ const CreateForm = ({ editing }) => {
             )}
           </div>
           <textarea
-            className={`form-control formContent mb-3 ${
-              contentError && "errorBorder"
-            }`}
-            style={{textAlign:'center'}}
+            className={`form-control formContent mb-3 ${contentError && "errorBorder"
+              }`}
+            style={{ textAlign: 'center' }}
             id="inputContent"
             rows="10"
             placeholder="5줄로 작성"

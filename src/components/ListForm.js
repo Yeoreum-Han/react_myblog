@@ -3,17 +3,17 @@ import { useCallback, useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom/cjs/react-router-dom";
 import CardForm from "./CardForm";
 import Pagination from "./Pagination";
+import { useSelector } from "react-redux";
+import LoadingSpinner from "./LoadingSpinner";
+import searchImg from "../images/search.png";
 
-const ListForm = ({isAdmin}) => {
+
+const ListForm = () => {
   const [posts, setPosts] = useState([]);
   const location = useLocation();
   const history = useHistory();
   const postLimit = 9;
-  let params = {
-    _limit : postLimit,
-    _sort : 'id',
-    _order : 'desc',
-  }
+
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPostNum, setTotalPostNum] = useState(0);
   const [totalPage, setTotalPage] = useState(0);
@@ -21,50 +21,75 @@ const ListForm = ({isAdmin}) => {
   const urlPageParams = new URLSearchParams(location.search);
   const pageParam = urlPageParams.get('page');
 
-  const getPosts = useCallback ((page = 1) => {
+  const [word, setWord] = useState("");
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const [loading, setLoading] = useState(true);
+
+
+
+  useEffect(() => {
+    setCurrentPage(parseInt(pageParam) || 1);
+    getPosts(parseInt(pageParam) || 1);
+  }, []);
+
+
+  useEffect(() => {
+    setTotalPage(Math.ceil(totalPostNum / postLimit))
+  }, [totalPostNum]);
+
+  
+  const getPosts = useCallback((page = 1) => {
+    let params = {
+      _limit: postLimit,
+      _sort: 'id',
+      _order: 'desc',
+      title_like: word,
+      content_like: word,
+    }
+
     setCurrentPage(page);
     if (location.pathname === "/blogs") {
       axios
-        .get("http://localhost:3001/posts", { params : {...params, _page : page, category : "blogs", privatePost : false}})
+        .get("http://localhost:3001/posts", { params: { ...params, _page: page, category: "blogs", privatePost: false } })
         .then((res) => {
           setPosts(res.data);
           setTotalPostNum(res.headers['x-total-count']);
+          setLoading(false);
         });
       return true;
     }
     if (location.pathname === "/reviews") {
       axios
-        .get("http://localhost:3001/posts", { params: { ...params, _page : page, category: "reviews", privatePost : false } })
+        .get("http://localhost:3001/posts", { params: { ...params, _page: page, category: "reviews", privatePost: false } })
         .then((res) => {
           setPosts(res.data);
           setTotalPostNum(res.headers['x-total-count']);
+          setLoading(false);
         });
       return true;
     }
-    if(isAdmin){
+    if (isLoggedIn) {
       axios
-        .get("http://localhost:3001/posts", { params: { ...params, _page : page} })
+        .get("http://localhost:3001/posts", { params: { ...params, _page: page } })
         .then((res) => {
           setPosts(res.data);
           setTotalPostNum(res.headers['x-total-count']);
+          setLoading(false);
         });
       return true;
     }
-  },[isAdmin, location.pathname]);
+  }, [isLoggedIn, location.pathname, word]);
 
-  useEffect(()=>{
-    setTotalPage(Math.ceil(totalPostNum / postLimit))
-  },[totalPostNum]);
+  if(loading){
+    return <LoadingSpinner />;
+  }
 
-  const onClickPageButton = (page) =>{
+  
+
+  const onClickPageButton = (page) => {
     history.push(`${location.pathname}?page=${page}`);
     getPosts(page);
   }
-
-  useEffect(()=>{
-    setCurrentPage(parseInt(pageParam) || 1);
-    getPosts(parseInt(pageParam) || 1);
-  },[getPosts, pageParam]);
 
   const renderCards = () => {
     return posts
@@ -75,24 +100,44 @@ const ListForm = ({isAdmin}) => {
             title={post.title}
             content={post.content}
             imgSrc={post.imageString}
-            onClick={()=>{history.push(`/${post.id}`)}}
+            onClick={() => { history.push(`/${post.id}`) }}
           />
         );
       });
   };
 
+  const onSearch = (e) => {
+    if (e.key === "Enter") {
+      history.push(`${location.pathname}?page=1`)
+      setCurrentPage(1);
+      getPosts(1);
+    }
+  }
+
 
 
   return (
     <div>
-      <div className="row row-cols-1 row-cols-md-3 g-2 px-4">{renderCards()}</div>
-      {isAdmin && 
+      <div className="row row-cols-1 row-cols-md-3 g-2 ">{renderCards()}</div>
+      {isLoggedIn &&
         <div className="d-flex flex-row justify-content-between me-5 mt-3">
-          <div/>
-          <div onClick={()=>{history.push('/create')}} className="me-4 px-2 writeBtn" style={{textDecoration : 'none', color : '#333', cursor : 'pointer'}}>글쓰기</div>
+          <div />
+          <div onClick={() => { history.push('/create') }} className="me-4 px-2 writeBtn" style={{ textDecoration: 'none', color: '#333', cursor: 'pointer' }}>글쓰기</div>
         </div>}
-      <div className="d-flex justify-content-center pt-5"> 
-        {totalPage > 1 && <Pagination currentPage={currentPage} totalPage={totalPage} onClick={onClickPageButton}/>}
+      <div className="d-flex justify-content-center mt-5 input-group " >
+        <div className="searchCover" style={{ maxWidth: '250px' }}>
+          <span className="searchImg"/>
+          <input
+            className="search mt-1 mx-1 "
+            type="search"
+            aria-label="Search"
+            onChange={(e) => { setWord(e.target.value) }}
+            onKeyUp={onSearch}
+          />
+        </div>
+      </div>
+      <div className="d-flex justify-content-center mt-4">
+        {totalPage > 1 && <Pagination currentPage={currentPage} totalPage={totalPage} onClick={onClickPageButton} />}
       </div>
     </div>
 

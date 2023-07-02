@@ -2,7 +2,7 @@ const CardForm = ({ title, content, imgSrc, onClick }) => {
   return (
     <div className="col mb-3">
       <div
-        className="card" aria-hidden="true"
+        className="card shadow" aria-hidden="true"
         style={{ width: "20rem", height: "15rem" }}
         onClick={onClick}
       >

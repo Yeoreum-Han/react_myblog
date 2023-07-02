@@ -4,7 +4,7 @@ import {Redirect, Route} from "react-router-dom"
 const ProtectedRoute = ({component, path, key}) => {
     const isLoggedIn = useSelector((state)=>state.auth.isLoggedIn);
     if(!isLoggedIn) {
-        return console.log('a');
+        return <Redirect to="/"/>
     }
     return <Route
     component={component}

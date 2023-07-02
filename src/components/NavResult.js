@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import {useLocation} from "react-router-dom/cjs/react-router-dom";
@@ -15,14 +14,6 @@ const NavResult = () => {
     console.log('2.data : ', post);
   }
 
-  // const getPosts = () => {
-  //   setWord(location.word);
-  //   console.log('1.axios 전: ', word);
-  //   axios.get("http://localhost:3001/posts", {params : {_sort: 'id', _order : 'desc', privatePost : false, title_like : word }}).then(res=>{
-  //     setPosts(res.data);
-  //     console.log('2.axios 후 : ', word);
-  //   })
-  // }
   useEffect(()=>{
     get();
   },[]);

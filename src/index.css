@@ -19,6 +19,7 @@ code {
 .navHome {
   letter-spacing: 3px;
   text-indent: 80px;
+  margin-left: 10%;
 }
 .navLi {
   width: 70px;
@@ -40,22 +41,11 @@ code {
   border-color: #9da39e;
   box-shadow: 0 0 0 0.1rem #00c3ff42;
 }
-.navSearch {
-  border-radius: 50px;
-  text-indent: 5px;
-}
-.navSearchBtn {
-  border-radius: 10px;
-}
-.navSearchBtn:hover {
-  background-color: #e3f2fd;
-  color: #333;
-}
 
 /* Sidebar */
 .sideBg {
   /* background-color: #e3f2fd3b; */
-  width: 17%;
+  width: 20%;
   height: 950px;
 }
 .prof {
@@ -226,7 +216,7 @@ code {
 .comp {
   width: 75%;
   min-height: 980px;
-  padding: 5%;
+  padding: 5% 3%;
   /* background-color: #E97777; */
 }
 .reviewsTitle {
@@ -269,4 +259,51 @@ code {
   height: 18px;
   margin-right: 5px;
   content: "";
+}
+
+/*search*/
+.searchCover{
+  border-radius: 5px;
+  border: 1px solid #9da39e;
+}
+.search {
+  border: none;
+  outline: none;
+  color: #333;
+}
+.searchImg::after{
+  background: url(./images/search.png) no-repeat 3px 3px;
+  background-size: 16px 16px;
+  display: inline-block;
+  width: 20px;
+  height: 18px;
+  margin-left: 3px;
+  content: "";
+}
+
+
+/*pagination*/
+.page-link{
+  border: 1px solid #e3f2fd;
+  cursor: pointer;
+    color: #333;
+}
+
+.active>.page-link{
+  background-color: #e3f2fd;
+  border: 1px solid #e3f2fd;
+  color: #333;
+}
+.page-link:hover{
+  border: 1px solid #e3f2fd;
+  background-color: #e3f2fd;
+  cursor: pointer;
+  color: #333;
+}
+
+/*loadingSpinner*/
+.loading{
+  position: absolute;
+  top: 40vh;
+  left: 110vh;
 }
