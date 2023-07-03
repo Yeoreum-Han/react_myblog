@@ -1,5 +1,4 @@
 import axios from "axios";
-import profile from "../images/coffee.jpg";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import LoadingSpinner from "./LoadingSpinner";
@@ -15,7 +14,7 @@ const Home = () => {
 
   const getRecents = () => {
     axios
-      .get("http://localhost:3001/posts", {
+      .get("https://majestic-smiling-timer.glitch.me/posts", {
         params: { _limit: "6", _sort: "createdAt", _order: "desc" },
       })
       .then((res) => {
@@ -60,7 +59,7 @@ const Home = () => {
           <div className="col col-3"></div>
           <img
             className="homeProfImg col col-2 mt-4"
-            src={profile}
+            src='/images/coffee.jpg'
             alt="블로그소개 이미지"
           />
           <div className="col col-1"></div>

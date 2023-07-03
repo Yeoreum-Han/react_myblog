@@ -1,4 +1,4 @@
-import whiteBg from "../images/whiteBg.jpg";
+// import whiteBg from "../images/whiteBg.jpg";
 
 const CardForm = ({ title, content, imgSrc, onClick }) => {
   return (
@@ -8,7 +8,7 @@ const CardForm = ({ title, content, imgSrc, onClick }) => {
         style={{ width: "18vw", height: "30vh" }}
         onClick={onClick}>
         <img
-          src={imgSrc !== "" ? imgSrc : whiteBg}
+          src={imgSrc !== "" ? imgSrc : "/images/whiteBg.jpg"}
           className="card-img-top"
           alt="..."
           style={{ width: "100%", height: "55%", objectFit:'cover'}}

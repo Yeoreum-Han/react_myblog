@@ -67,7 +67,7 @@ const CreateForm = ({ editing }) => {
     if (validateCheck()) {
       if (editing) {
         axios
-          .patch(`http://localhost:3001/posts/${id}`, {
+          .patch(`https://majestic-smiling-timer.glitch.me/posts/${id}`, {
             category,
             title,
             content,
@@ -79,7 +79,7 @@ const CreateForm = ({ editing }) => {
           });
       } else {
         axios
-          .post("http://localhost:3001/posts", {
+          .post("https://majestic-smiling-timer.glitch.me/posts", {
             category,
             title,
             createdAt: Date.now(),
@@ -105,7 +105,7 @@ const CreateForm = ({ editing }) => {
 
   useEffect(() => {
     if (editing) {
-      axios.get(`http://localhost:3001/posts/${id}`).then((res) => {
+      axios.get(`https://majestic-smiling-timer.glitch.me/posts/${id}`).then((res) => {
         setCategory(res.data.category);
         setTitle(res.data.title);
         setContent(res.data.content);

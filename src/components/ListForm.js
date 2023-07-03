@@ -5,6 +5,8 @@ import CardForm from "./CardForm";
 import Pagination from "./Pagination";
 import { useSelector } from "react-redux";
 import LoadingSpinner from "./LoadingSpinner";
+// import whiteBg from "../images/whiteBg.jpg";
+
 
 const ListForm = () => {
   const [posts, setPosts] = useState([]);
@@ -45,7 +47,7 @@ const ListForm = () => {
       setCurrentPage(page);
       if (location.pathname === "/blogs") {
         axios
-          .get("http://localhost:3001/posts", {
+          .get("https://majestic-smiling-timer.glitch.me/posts", {
             params: {
               ...params,
               _page: page,
@@ -62,7 +64,7 @@ const ListForm = () => {
       }
       if (location.pathname === "/reviews") {
         axios
-          .get("http://localhost:3001/posts", {
+          .get("https://majestic-smiling-timer.glitch.me/posts", {
             params: {
               ...params,
               _page: page,
@@ -79,7 +81,7 @@ const ListForm = () => {
       }
       if (isLoggedIn) {
         axios
-          .get("http://localhost:3001/posts", {
+          .get("https://majestic-smiling-timer.glitch.me/posts", {
             params: { ...params, _page: page },
           })
           .then((res) => {
@@ -138,8 +140,8 @@ const ListForm = () => {
             onClick={() => {
               history.push("/create");
             }}
-            className="me-4 px-2 writeBtn"
-            style={{ textDecoration: "none", color: "#333", cursor: "pointer" }}
+            className="writeBtn"
+            style={{ textDecoration: "none", color: "#333", cursor: "pointer", marginRight:"5%" }}
           >
             글쓰기
           </div>
@@ -149,7 +151,7 @@ const ListForm = () => {
         <div className="row grid">
           <div className="col col-4 me-2" />
           <div className="searchCover col col-3 ms-4">
-            <span className="searchImg" />
+            <span className="searchImg me-2" />
             <input
               className="search mt-1 mx-1 "
               type="search"
@@ -158,6 +160,7 @@ const ListForm = () => {
                 setWord(e.target.value);
               }}
               onKeyUp={onSearch}
+              style={{width: "87%"}}
             />
           </div>
         </div>

@@ -261,7 +261,7 @@ code {
 
 /*Lisform*/
 .writeBtn::before {
-  background: url(./images/edit.png) no-repeat 0 2px;
+  background: url(../public/images/edit.png) no-repeat 0 2px;
   background-size: 18px 16px;
   display: inline-block;
   width: 18px;
@@ -281,7 +281,7 @@ code {
   color: #333;
 }
 .searchImg::after{
-  background: url(./images/search.png) no-repeat 3px 3px;
+  background: url(../public/images/search.png) no-repeat 3px 3px;
   background-size: 16px 16px;
   display: inline-block;
   width: 20px;

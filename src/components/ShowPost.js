@@ -16,7 +16,7 @@ const ShowPosts = () => {
 
 
   const getPosts = (id) => {
-    axios.get(`http://localhost:3001/posts/${id}`).then((res) => {
+    axios.get(`https://majestic-smiling-timer.glitch.me/posts/${id}`).then((res) => {
       setPost(res.data);
       setLoading(false);
     });
@@ -37,7 +37,7 @@ const ShowPosts = () => {
   }
 
   const deletePost = (id) => {
-    axios.delete(`http://localhost:3001/posts/${id}`).then(()=>{
+    axios.delete(`https://majestic-smiling-timer.glitch.me/posts/${id}`).then(()=>{
       history.push('/private/admin');
     });
   }

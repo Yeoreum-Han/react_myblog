@@ -1,4 +1,4 @@
-import profile from '../images/coffee.jpg';
+// import profile from '../images/coffee.jpg';
 import {Link, NavLink} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -12,8 +12,8 @@ const SideBar = () => {
     <div className="sideBg d-flex flex-column align-items-center">
       <div className="prof d-flex flex-column align-items-center mt-5 mb-3 pt-5">
         <img
-          src={profile}
-          className="profImg rounded-circle mb-1"
+            src='/images/coffee.jpg'
+            className="profImg rounded-circle mb-1"
           alt="프로필사진"
         />
         <p className="profP text-center mt-4"><em>2023 삶의 기록, 좋았던 것들 리뷰 적어서 담아두기</em></p>
