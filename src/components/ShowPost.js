@@ -59,7 +59,7 @@ const ShowPosts = () => {
             </p>
           </div>
           <div className="showContent fs-4 text-center">
-            <img src={post.imageString} alt="..." className="showImgSize" />
+            {post.imageString && <img src={post.imageString} alt="..." className="showImgSize" />}
             <p className="mt-5 fs-6" style={{whiteSpace : 'pre-wrap'}}>{post.content}</p>
           </div>
         </div>

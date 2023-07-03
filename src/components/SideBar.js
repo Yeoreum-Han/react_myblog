@@ -10,7 +10,7 @@ const SideBar = () => {
 
   return (
     <div className="sideBg d-flex flex-column align-items-center">
-      <div className="prof d-flex flex-column align-items-center mt-5 mb-3">
+      <div className="prof d-flex flex-column align-items-center mt-5 mb-3 pt-5">
         <img
           src={profile}
           className="profImg rounded-circle mb-1"

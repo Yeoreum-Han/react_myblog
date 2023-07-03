@@ -18,8 +18,8 @@ const NavBar = () => {
           일상기록 블로그
         </Link>
         <div className="d-flex">
-          <div className="d-flex text-center ms-3">
-            <ul className="navbar-nav flex-row">
+          <div className="d-flex ms-3">
+            <ul className="navbar-nav flex-row justify-content-around">
               <li className="nav-item navLi me-2">
                 <NavLink
                   to="/reviews"
@@ -33,12 +33,13 @@ const NavBar = () => {
                 <NavLink
                   to="/blogs"
                   activeStyle={activeStyle}
-                  className="navbar navText"
+                  className="navbar navText ms-2"
+                  style={{width : "55px"}}
                 >
                   Blogs
                 </NavLink>
               </li>
-              <li className="nav-item navLi">
+              <li className="nav-item navLi ms-2">
                 <button className="navbar navBtn navText"
                   onClick={()=>{
                     if(isLoggedIn){

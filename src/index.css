@@ -14,20 +14,16 @@ code {
 
 /* Navbar */
 .navBg {
-  background-color: #e3f2fd;
+  background-color: #e3f2fd83;
 }
 .navHome {
   letter-spacing: 3px;
   text-indent: 80px;
-  margin-left: 10%;
-}
-.navLi {
-  width: 70px;
+  margin-left: 5vw;
 }
 .navText {
   color: #0e2954;
   text-decoration: none;
-  width: 70px;
   letter-spacing: 1px;
 }
 .navText:hover {
@@ -35,7 +31,7 @@ code {
 }
 .navBtn {
   border: none;
-  background-color: #e3f2fd;
+  background-color: #e3f2fd00;
 }
 .form-control:focus {
   border-color: #9da39e;
@@ -207,9 +203,21 @@ code {
   min-height: 980px;
   padding: 5%;
 }
-.cardTitle {
-  white-space: normal;
+
+.cardTitle{
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 18px;
+  color: #333;
+  letter-spacing: 1px;
+}
+.cardText{
+  white-space: pre-wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 16px;
+  color: #9da39e;
 }
 
 /* Reviews */
@@ -219,8 +227,9 @@ code {
   padding: 5% 3%;
   /* background-color: #E97777; */
 }
-.reviewsTitle {
+.compTitle {
   letter-spacing: 5px;
+  margin-left: 4%;
 }
 .card {
   cursor: pointer;
@@ -303,7 +312,6 @@ code {
 
 /*loadingSpinner*/
 .loading{
-  position: absolute;
-  top: 40vh;
-  left: 110vh;
+  margin-top: 10%;
+  margin-left: 40%;
 }

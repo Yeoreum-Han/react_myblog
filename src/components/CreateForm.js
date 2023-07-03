@@ -145,7 +145,6 @@ const CreateForm = ({ editing }) => {
               <option value="">카테고리</option>
               <option value="blogs">blogs</option>
               <option value="reviews">reviews</option>
-              <option value="trip">여행</option>
             </select>
           </div>
           {cateError && <p style={{ color: "red" }}>카테고리를 선택해주세요</p>}
@@ -169,7 +168,6 @@ const CreateForm = ({ editing }) => {
             type="file"
             id="inputFile"
             name="fileImage"
-            multiple
             onChange={updateImage}
           />
           <div className="imgCover my-3" style={{ textAlign: 'center' }}>
