@@ -1,5 +1,3 @@
-// import whiteBg from "../images/whiteBg.jpg";
-
 const CardForm = ({ title, content, imgSrc, onClick }) => {
   return (
     <div className="col mb-5">

@@ -37,6 +37,12 @@ code {
   border-color: #9da39e;
   box-shadow: 0 0 0 0.1rem #00c3ff42;
 }
+.search {
+  border: none;
+  outline: none;
+  color: #333;
+  height: 30px;
+}
 
 /* Sidebar */
 .sideBg {
@@ -270,27 +276,6 @@ code {
   content: "";
 }
 
-/*search*/
-.searchCover{
-  border-radius: 5px;
-  border: 1px solid #9da39e;
-}
-.search {
-  border: none;
-  outline: none;
-  color: #333;
-}
-.searchImg::after{
-  background: url(../public/images/search.png) no-repeat 3px 3px;
-  background-size: 16px 16px;
-  display: inline-block;
-  width: 20px;
-  height: 18px;
-  margin-left: 3px;
-  content: "";
-}
-
-
 /*pagination*/
 .page-link{
   border: 1px solid #e3f2fd;
@@ -312,6 +297,7 @@ code {
 
 /*loadingSpinner*/
 .loading{
-  margin-top: 10%;
-  margin-left: 40%;
+  position: absolute;
+  top: 30%;
+  left: 50%;
 }

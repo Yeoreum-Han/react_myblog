@@ -5,8 +5,6 @@ import CardForm from "./CardForm";
 import Pagination from "./Pagination";
 import { useSelector } from "react-redux";
 import LoadingSpinner from "./LoadingSpinner";
-// import whiteBg from "../images/whiteBg.jpg";
-
 
 const ListForm = () => {
   const [posts, setPosts] = useState([]);
@@ -21,18 +19,58 @@ const ListForm = () => {
   const urlPageParams = new URLSearchParams(location.search);
   const pageParam = urlPageParams.get("page");
 
-  const [word, setWord] = useState("");
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [loading, setLoading] = useState(true);
+  const keyword = useSelector((state) => state.search.keyword);
 
   useEffect(() => {
     setCurrentPage(parseInt(pageParam) || 1);
     getPosts(parseInt(pageParam) || 1);
-  }, []);
+  }, [keyword]);
 
   useEffect(() => {
     setTotalPage(Math.ceil(totalPostNum / postLimit));
   }, [totalPostNum]);
+
+  const getSearch = (params) => {
+    setLoading(true);
+    if (!isLoggedIn) {
+      if (keyword !== "") {
+        axios
+          .get("https://majestic-smiling-timer.glitch.me/posts", {
+            params: {
+              ...params,
+              title_like: keyword,
+              content_like: keyword,
+              privatePost: false,
+            },
+          })
+          .then((res) => {
+            setPosts(res.data);
+            setTotalPostNum(res.headers["x-total-count"]);
+            setLoading(false);
+          });
+      }
+      return true;
+    } else {
+      if (keyword !== "") {
+        axios
+          .get("https://majestic-smiling-timer.glitch.me/posts", {
+            params: {
+              ...params,
+              title_like: keyword,
+              content_like: keyword,
+            },
+          })
+          .then((res) => {
+            setPosts(res.data);
+            setTotalPostNum(res.headers["x-total-count"]);
+            setLoading(false);
+          });
+      }
+      return true;
+    }
+  };
 
   const getPosts = useCallback(
     (page = 1) => {
@@ -40,8 +78,7 @@ const ListForm = () => {
         _limit: postLimit,
         _sort: "id",
         _order: "desc",
-        title_like: word,
-        content_like: word,
+        _page: page,
       };
 
       setCurrentPage(page);
@@ -50,7 +87,6 @@ const ListForm = () => {
           .get("https://majestic-smiling-timer.glitch.me/posts", {
             params: {
               ...params,
-              _page: page,
               category: "blogs",
               privatePost: false,
             },
@@ -67,7 +103,6 @@ const ListForm = () => {
           .get("https://majestic-smiling-timer.glitch.me/posts", {
             params: {
               ...params,
-              _page: page,
               category: "reviews",
               privatePost: false,
             },
@@ -79,10 +114,13 @@ const ListForm = () => {
           });
         return true;
       }
+      if (location.pathname === "/search/result") {
+        getSearch(params);
+      }
       if (isLoggedIn) {
         axios
           .get("https://majestic-smiling-timer.glitch.me/posts", {
-            params: { ...params, _page: page },
+            params,
           })
           .then((res) => {
             setPosts(res.data);
@@ -92,7 +130,7 @@ const ListForm = () => {
         return true;
       }
     },
-    [isLoggedIn, location.pathname, word]
+    [isLoggedIn, location.pathname, keyword]
   );
 
   if (loading) {
@@ -120,18 +158,10 @@ const ListForm = () => {
     });
   };
 
-  const onSearch = (e) => {
-    if (e.key === "Enter") {
-      history.push(`${location.pathname}?page=1`);
-      setCurrentPage(1);
-      getPosts(1);
-    }
-  };
-
   return (
     <div>
       <div className="row row-cols-1 row-cols-md-3 g-1 px-5">
-        {renderCards()}
+        {posts.length > 0 ? renderCards() : "글이 없습니다."}
       </div>
       {isLoggedIn && (
         <div className="d-flex flex-row justify-content-between me-5 mt-3">
@@ -141,30 +171,17 @@ const ListForm = () => {
               history.push("/create");
             }}
             className="writeBtn"
-            style={{ textDecoration: "none", color: "#333", cursor: "pointer", marginRight:"5%" }}
+            style={{
+              textDecoration: "none",
+              color: "#333",
+              cursor: "pointer",
+              marginRight: "5%",
+            }}
           >
             글쓰기
           </div>
         </div>
       )}
-      <div className="container mt-3">
-        <div className="row grid">
-          <div className="col col-4 me-2" />
-          <div className="searchCover col col-3 ms-4">
-            <span className="searchImg me-2" />
-            <input
-              className="search mt-1 mx-1 "
-              type="search"
-              aria-label="Search"
-              onChange={(e) => {
-                setWord(e.target.value);
-              }}
-              onKeyUp={onSearch}
-              style={{width: "87%"}}
-            />
-          </div>
-        </div>
-      </div>
       <div className="d-flex justify-content-center mt-4 pe-5">
         {totalPage > 1 && (
           <Pagination

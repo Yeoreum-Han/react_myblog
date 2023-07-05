@@ -1,4 +1,3 @@
-// import profile from '../images/coffee.jpg';
 import {Link, NavLink} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
