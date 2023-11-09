@@ -16,9 +16,7 @@ Reviews와 Blogs로 카테고리를 나누어 글을 주제에 따라 모아볼 
 ## 핵심기능
 **1. 로그인상태**   
 ![md_myblog02](https://github.com/Yeoreum-Han/react_myblog/assets/127937169/22a02aa8-276e-4e16-8a67-095d031a830d)   
-로컬스토리지와 리덕스 스토어를 이용해 로그인 상태일 때만 Admin 페이지가 활성화되고 게시글 수정 및 삭제가 가능합니다.   
-또한 Reviews와 Blogs 페이지에서 비공개 글을 볼 수 있습니다.   
-NavBar에서 검색 할 때도 로그인 상태에 따라 비공개 글이 검색결과로 보여집니다.   
+로컬스토리지와 리덕스 스토어를 이용해 로그인 상태일 때만 Admin 페이지가 활성화되고 게시글 수정 및 삭제가 가능합니다. 또한 Reviews와 Blogs 페이지에서 비공개 글을 볼 수 있습니다. NavBar에서 검색 할 때도 로그인 상태에 따라 비공개 글이 검색결과로 보여집니다.   
 ```js
 //authSlice.js
 //여기서 export한 isLoggedIn은 다른 컴포넌트에서 useSelector를 이용해  리턴값으로 받아와서 사용.
@@ -126,9 +124,7 @@ const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 ```
 ## 트러블슈팅
 **1. nav검색**   
-NavBar에 검색기능을 넣고 하단 ListForm에서 결과를 표시하고 싶었는데 컴포넌트간 데이터 직접 전달이 불가능하므로 구현이 어려웠습니다.   
-이는 **리덕스 스토어**를 사용해 reducer로 **keyword** 상태를 업데이트하고 useSelector로 값을 받아와 axios로 get하는 방식으로 해결했습니다.   
-검색어를 다 작성한 후 **엔터를 눌렀을 때만 검색**이 되도록 NavBar에서 **word라는 state로 입력값을 업데이트** 하도록 했습니다.   
+NavBar에 검색기능을 넣고 하단 ListForm에서 결과를 표시하고 싶었는데 컴포넌트간 데이터 직접 전달이 불가능하므로 구현이 어려웠습니다. 이는 **리덕스 스토어**를 사용해 reducer로 **keyword** 상태를 업데이트하고 useSelector로 값을 받아와 axios로 get하는 방식으로 해결했습니다. 검색어를 다 작성한 후 **엔터를 눌렀을 때만 검색**이 되도록 NavBar에서 **word라는 state로 입력값을 업데이트** 하도록 했습니다.   
 ```js
 //searchSlice.js
 import { createSlice } from "@reduxjs/toolkit";
@@ -178,9 +174,7 @@ const keyword = useSelector((state) => state.search.keyword);
   };
 ```
 **2. 이미지 업로드와 불러오기**   
-이미지를 미리 보기까지는 됐는데 db에 저장 되지 않는 문제가 있었습니다.   
-실행시 단계별로 확인해보고 검색한 결과, 이 프로젝트는 **json-server를 사용**하기 때문에 이미지파일을 저장하려면   
-**객체를 string으로 변환** 해야 했습니다. 그래서 이를 FileReader를 사용해 해결했습니다.   
+이미지를 미리 보기까지는 됐는데 db에 저장 되지 않는 문제가 있었습니다. 실행시 단계별로 확인해보고 검색한 결과, 이 프로젝트는 **json-server를 사용**하기 때문에 이미지파일을 저장하려면 **객체를 string으로 변환** 해야 했습니다. 그래서 이를 FileReader를 사용해 해결했습니다.   
 ```js
   const updateImage = (e) => {                 /*이미지 미리보기*/
     const file = e.target.files[0];         
