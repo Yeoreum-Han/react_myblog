@@ -15,7 +15,7 @@ const SideBar = () => {
             className="profImg rounded-circle mb-1"
           alt="프로필사진"
         />
-        <p className="profP text-center mt-4"><em>2023 삶의 기록, 좋았던 것들 리뷰 적어서 담아두기</em></p>
+        <p className="profP text-center mt-4"><em>삶의 기록, 좋았던 것들 리뷰 적어서 담아두기</em></p>
       </div>
       <div>
         <ul className="navbar-nav my-4 text-center">
