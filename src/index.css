@@ -16,10 +16,13 @@ code {
 .navBg {
   background-color: #e3f2fd83;
 }
+.navBg>.container{
+  width: 100%;
+  justify-content: center;
+}
 .navHome {
   letter-spacing: 3px;
-  text-indent: 80px;
-  margin-left: 5vw;
+  width: 20vw;
 }
 .navText {
   color: #0e2954;
@@ -88,6 +91,9 @@ code {
 }
 
 .homeProf {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   /* background-color: #9da39e; */
   box-sizing: border-box;
   border-top: 1px solid #333;
@@ -98,15 +104,16 @@ code {
 }
 
 .homeProfImg {
-  border-radius: 150px;
-  width: 150px;
-  height: 150px;
+  border-radius: 30%;
+  width: 20%;
+  height: 75%;
   /* background-color: aqua; */
 }
 
 .homeProfP {
   /* background-color: aqua; */
-  width: 350px;
+  width: 60%;
+  height: 150px;
   letter-spacing: 3px;
   line-height: 35px;
   font-style: italic;
@@ -219,7 +226,7 @@ code {
   letter-spacing: 1px;
 }
 .cardText{
-  white-space: pre-wrap;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 16px;
